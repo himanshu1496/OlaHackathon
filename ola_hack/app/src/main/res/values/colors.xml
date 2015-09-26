@@ -6,4 +6,5 @@
     <color name="black">#000000</color>
     <color name="bg_gradient_start">#deff29</color>
     <color name="bg_gradient_end">#29dbc4</color>
+    <color name="button_solid_color">#e18b3d</color>
 </resources>
