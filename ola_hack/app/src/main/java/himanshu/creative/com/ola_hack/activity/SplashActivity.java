@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import himanshu.creative.com.ola_hack.R;
+import himanshu.creative.com.ola_hack.utils.Constants;
 import himanshu.creative.com.ola_hack.utils.Methods;
 import himanshu.creative.com.ola_hack.utils.PreferenceUtils;
 
@@ -94,6 +95,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loginWithStaticAuth(){
-        PreferenceUtils.setAuthToken("d37a2b489daa43d288c81eeb6fb4b5a2");
+        PreferenceUtils.setAuthToken(Constants.access_token);
     }
 }

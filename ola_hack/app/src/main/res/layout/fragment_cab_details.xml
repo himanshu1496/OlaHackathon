@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/">
+    android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
@@ -25,6 +24,12 @@
                 android:fontFamily="sans-serif-medium"
                 android:id="@+id/textView1"
                 android:gravity="center"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/divider">
 
 
             <TextView
@@ -34,7 +39,7 @@
                 android:paddingTop="18dp"
 
 
-                android:layout_below="@+id/textView1"
+
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="SEDAN"
                 android:fontFamily="sans-serif"
@@ -54,7 +59,7 @@
                 />
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:paddingLeft="8dp"
 
 
@@ -65,29 +70,30 @@
                 />
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:fontFamily="sans-serif"
                 android:paddingTop="24dp"
-                android:layout_alignRight="@id/textView8"
+
 
                 android:layout_below="@+id/textView1"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="BOOK"
                 android:id="@+id/textView5"
                 />
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView1"
-                android:src="@drawable/rectangle_100"></ImageView>
+            </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/divider">
             <TextView
                 android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/textView5"
+                android:layout_height="36dp"
+
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="CAB"
-                android:paddingTop="40dp"
+                android:paddingTop="16dp"
                 android:paddingLeft="8dp"
                 android:fontFamily="sans-serif"
                 android:id="@+id/textView6"
@@ -95,7 +101,7 @@
 
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:paddingLeft="8dp"
 
                 android:layout_below="@+id/textView6"
@@ -105,16 +111,18 @@
                 />
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:fontFamily="sans-serif"
-                android:paddingTop="40dp"
+                android:paddingTop="24dp"
 
-                android:layout_below="@+id/textView5"
+
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="VIEW BOOKING"
                 android:id="@+id/textView8"
                 />
+
+
 
 
 
@@ -132,14 +140,15 @@
         android:layout_marginTop="100dp"
         android:background="@null"
         android:textSize="@dimen/font_size_xlarge"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        android:visibility="invisible"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -150,6 +159,18 @@
             android:background="@null"
             android:src="@drawable/microphone" />
 
+        <TextView
+            android:id="@+id/confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"
+            android:textSize="@dimen/font_size_large"
+            android:gravity="center"
+            android:layout_margin="@dimen/confirm_button_margin"
+            android:background="@drawable/button_background"
+            android:padding="@dimen/confirm_button_padding"
+            android:visibility="invisible"
+            />
 
     </LinearLayout>
 
