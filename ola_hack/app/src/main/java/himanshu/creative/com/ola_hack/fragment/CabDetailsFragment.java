@@ -36,12 +36,9 @@ public class CabDetailsFragment extends Fragment {
 
     Activity activity;
     @Bind(R.id.txtSpeechInput)
-    private EditText txtSpeechInput;
+    EditText txtSpeechInput;
     @Bind(R.id.btnSpeak)
-    private ImageButton btnSpeak;
-    @Bind(R.id.label_tap_on_mic)
-    private ShimmerTextView tapOnMic;
-    private Shimmer shimmer;
+    ImageButton btnSpeak;
 
 
     @Override
@@ -57,11 +54,6 @@ public class CabDetailsFragment extends Fragment {
         activity = (AppCompatActivity) getActivity();
         View rootView = inflater.inflate(R.layout.fragment_cab_details, container, false);
         ButterKnife.bind(this, rootView);
-        txtSpeechInput = (EditText) rootView.findViewById(R.id.txtSpeechInput);
-        btnSpeak = (ImageButton) rootView.findViewById(R.id.btnSpeak);
-        tapOnMic = (ShimmerTextView) rootView.findViewById(R.id.label_tap_on_mic);
-        shimmer = new Shimmer();
-        shimmer.start(tapOnMic);
 
 
         btnSpeak.setOnClickListener(new View.OnClickListener() {
