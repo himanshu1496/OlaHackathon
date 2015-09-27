@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="10"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,30 +35,47 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="SUDO"
                 android:background="#E18B3D"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:fontFamily="sans-serif-medium"
                 android:id="@+id/textView1"
                 android:gravity="center"/>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/sedan_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/divider">
+            android:background="@drawable/divider"
+            android:layout_alignBaseline="@+id/label_booked_cab"
+            android:layout_alignBottom="@+id/label_booked_cab"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="BOOK NOW"
+                android:paddingTop="8dp"
+                android:paddingLeft="8dp"
+                android:fontFamily="sans-serif-light"
+
+                android:background="@color/gray"
+                android:id="@+id/bk_now"
+                />
 
             <TextView
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:paddingLeft="8dp"
-                android:paddingTop="18dp"
+                android:layout_width="80dp"
+                android:layout_height="66dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="46dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="SEDAN"
                 android:fontFamily="sans-serif"
                 android:id="@+id/label_sedan"
                 />
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="72dp"
                 android:layout_height="18dp"
                 android:layout_toRightOf="@id/label_sedan"
                 android:layout_alignBottom="@id/label_sedan"
@@ -69,76 +86,84 @@
                 />
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:paddingLeft="8dp"
-
-
+                android:layout_height="32dp"
+                android:paddingLeft="16dp"
                 android:layout_below="@id/label_sedan"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="X mins away"
+                android:textColor="@color/black54"
                 android:id="@+id/label_sedan_eta"
                 />
             <TextView
-                android:layout_width="50dp"
-                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:layout_height="96dp"
                 android:layout_alignParentRight="true"
                 android:fontFamily="sans-serif"
-                android:paddingTop="24dp"
+                android:paddingTop="56dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="BOOK"
                 android:id="@+id/label_sedan_book"
-                />
-            </RelativeLayout>
+                android:layout_marginRight="16dp" />
+
+
+        </RelativeLayout>
+
+
+
         <RelativeLayout
             android:id="@+id/booked_cab_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/divider">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="BOOKED"
+                android:paddingTop="8dp"
+                android:paddingLeft="8dp"
+                android:fontFamily="sans-serif-light"
+
+                android:background="@color/gray"
+                android:id="@+id/booked_label"
+                />
+
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="66dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="CAB"
-                android:paddingTop="16dp"
-                android:paddingLeft="8dp"
+                android:paddingTop="46dp"
+                android:paddingLeft="16dp"
                 android:fontFamily="sans-serif"
                 android:id="@+id/label_booked_cab"
                 />
 
-
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:paddingLeft="8dp"
-
+                android:layout_width="104dp"
+                android:layout_height="32dp"
+                android:paddingLeft="16dp"
                 android:layout_below="@+id/label_booked_cab"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="For xx:xx xx"
+                android:textColor="@color/black54"
                 android:id="@+id/label_booked_cab_info"
                 />
             <TextView
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="38dp"
+                android:layout_height="96dp"
                 android:layout_alignParentRight="true"
                 android:fontFamily="sans-serif"
-                android:paddingTop="24dp"
+                android:paddingTop="56dp"
+                android:paddingLeft="0dp"
+                android:layout_marginRight="16dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="VIEW BOOKING"
+                android:text="VIEW"
                 android:id="@+id/label_view_booking"
-                />
-            <TextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Confirmed"
-                android:textSize="@dimen/font_size_micro"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/button_solid_color"
-                android:layout_below="@id/label_view_booking"
-                android:layout_alignParentRight="true"
-                android:id="@+id/label_confirmed"
                 />
 
         </RelativeLayout>
@@ -185,6 +210,7 @@
             android:gravity="center"
             android:layout_margin="@dimen/confirm_button_margin"
             android:background="@drawable/button_background"
+            android:textColor="@color/white"
             android:padding="@dimen/confirm_button_padding"
             android:visibility="invisible"
             />

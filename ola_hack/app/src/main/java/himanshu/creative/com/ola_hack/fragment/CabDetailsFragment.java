@@ -78,8 +78,6 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
     TextView labelBookedInfo;
     @Bind(R.id.label_view_booking)
     TextView labelViewBooking;
-    @Bind(R.id.label_confirmed)
-    TextView labelConfirmed;
 
 
     @Bind(R.id.sedan_layout)
@@ -245,6 +243,19 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
                 txtSpeechInput.setVisibility(View.INVISIBLE);
             }
         });
+        labelViewBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.addToBackStack(null);
+                CabBookingDetailsFragment cabBookingDetailsFragment = new CabBookingDetailsFragment();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_left,R.anim.slide_in_left,R.anim.slide_out_right);
+                fragmentTransaction
+                        .replace(R.id.place_request_container, cabBookingDetailsFragment)
+                        .commit();
+            }
+        });
 
         txtSpeechInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -383,9 +394,9 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
                 }
 
                 if (cabDetailsModel.getRide().isConfirmed()){
-                    labelConfirmed.setVisibility(View.VISIBLE);
+                    labelViewBooking.setVisibility(View.VISIBLE);
                 } else {
-                    labelConfirmed.setVisibility(View.INVISIBLE);
+                    labelViewBooking.setVisibility(View.INVISIBLE);
                 }
 
             } else {

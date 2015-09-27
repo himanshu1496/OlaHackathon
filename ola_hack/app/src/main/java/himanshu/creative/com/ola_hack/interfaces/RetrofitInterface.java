@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import himanshu.creative.com.ola_hack.modals.CabDetailsModel;
 import himanshu.creative.com.ola_hack.modals.OnSuccess;
+import himanshu.creative.com.ola_hack.modals.RideModel;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.QueryMap;
@@ -18,6 +19,9 @@ public interface RetrofitInterface {
 
     @GET("/index")
     void getCabDetails(@QueryMap HashMap<String, String> params, Callback<CabDetailsModel> cb);
+
+    @GET("/details")
+    void bookedCabDetails(@QueryMap HashMap<String, String> params, Callback<RideModel> cb);
 
 //    @GET("/getAppointments")
 //    void getAppointments(@Header("token") String token, Callback<List<AppointmentModel>> callback);

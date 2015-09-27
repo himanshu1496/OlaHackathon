@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ola_theme_color">#deff29</color>
+
     <color name="white">#ffffff</color>
     <color name="loading_color">#000000</color>
     <color name="black">#000000</color>
@@ -8,8 +8,10 @@
     <color name="bg_gradient_end">#29dbc4</color>
 
     <color name="red">#d0021b</color>
-
+    <color name="black54">#54000000</color>
     <color name="button_solid_color">#e18b3d</color>
-    <color name="gray">#5b5b5b</color>
+    <color name="ola_theme_color">#e18b3d</color>
+    <color name="ola_theme_color_dark">#BC7433</color>
+    <color name="gray">#e5e5e5</color>
 
 </resources>

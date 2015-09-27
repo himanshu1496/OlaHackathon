@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="SUDO"
+            android:background="#E18B3D"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-medium"
+            android:id="@+id/textView1"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                android:gravity="left"
+
+                android:paddingTop="24dp"
+                android:paddingBottom = "6dp"
+                android:paddingLeft="16dp"
+
+
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:text="Car Model"
+                android:fontFamily="sans-serif"
+                android:id="@+id/carmodel"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:gravity="left"
+
+            android:paddingTop="24dp"
+            android:paddingBottom = "24dp"
+            android:paddingLeft="16dp"
+
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Vehicle Number"
+            android:fontFamily="sans-serif"
+            android:id="@+id/vehnum"
+            android:autoText="false" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:paddingTop = "160dp"
+                android:paddingBottom = "8dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Driver Name"
+                android:fontFamily="sans-serif"
+                android:id="@+id/drivname"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:paddingTop = "16dp"
+
+
+                android:paddingBottom = "16dp"
+                android:background="#E18B3D"
+                android:textColor="#FFFFFF"
+
+
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Call: Phone Number"
+                android:fontFamily="sans-serif"
+                android:id="@+id/phonenum"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
