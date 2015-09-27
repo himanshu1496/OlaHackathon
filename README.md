@@ -6,7 +6,9 @@ _This is the repository of the android part of our submission._
 The android application works as an interface where the user can choose to book a cab using voice or text input.
 We will intimate the user via notifications when the booking has been confirmed
 
-Mobile application screens:  
+Mobile application screens:
+
+[View Prototype](https://marvelapp.com/79bhia)
 
 ![Dashboard](http://himanshu1496.github.io/OlaHackathon/ola_hack/img/Dashboard.png)
 ![Voice Input](http://himanshu1496.github.io/OlaHackathon/ola_hack/img/Voice input Copy.png)
