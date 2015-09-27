@@ -314,7 +314,7 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
 
                 if (cabDetailsModel.getRide().getCategory()!= null){
                     labelBookedCab.setVisibility(View.VISIBLE);
-                    labelBookedCab.setText(cabDetailsModel.getRide().getCategory());
+                    labelBookedCab.setText(cabDetailsModel.getRide().getCategory().toUpperCase());
                 } else {
                     labelBookedCab.setVisibility(View.INVISIBLE);
                 }

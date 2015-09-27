@@ -25,27 +25,7 @@
             android:id="@+id/textView1"
             android:gravity="center"/>
     </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:gravity="center"
-
-            android:paddingTop="64dp"
-            android:paddingBottom = "8dp"
-
-
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Vehicle Number"
-            android:fontFamily="sans-serif"
-            android:id="@+id/vehnum"
-            />
-        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -55,18 +35,43 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="88dp"
-                android:gravity="center"
+                android:gravity="left"
 
-                android:paddingTop="2dp"
-                android:paddingBottom = "48dp"
+                android:paddingTop="24dp"
+                android:paddingBottom = "6dp"
+                android:paddingLeft="16dp"
 
 
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black"
+                android:textSize="24sp"
                 android:text="Car Model"
                 android:fontFamily="sans-serif"
                 android:id="@+id/carmodel"
                 />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:gravity="left"
+
+            android:paddingTop="24dp"
+            android:paddingBottom = "24dp"
+            android:paddingLeft="16dp"
+
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Vehicle Number"
+            android:fontFamily="sans-serif"
+            android:id="@+id/vehnum"
+            android:autoText="false" />
+        </RelativeLayout>
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -8,8 +8,8 @@
     <color name="bg_gradient_end">#29dbc4</color>
 
     <color name="red">#d0021b</color>
-
+    <color name="black54">#54000000</color>
     <color name="button_solid_color">#e18b3d</color>
-    <color name="gray">#5b5b5b</color>
+    <color name="gray">#EEEEEE</color>
 
 </resources>
