@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import himanshu.creative.com.ola_hack.R;
 import himanshu.creative.com.ola_hack.interfaces.RetrofitInterface;
+import himanshu.creative.com.ola_hack.modals.CabDetailsModel;
 import himanshu.creative.com.ola_hack.utils.Constants;
 import himanshu.creative.com.ola_hack.utils.Methods;
 import himanshu.creative.com.ola_hack.utils.PreferenceUtils;
@@ -73,6 +75,13 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
     @Bind(R.id.label_view_booking)
     TextView labelViewBooking;
 
+    @Bind(R.id.sedan_layout)
+    RelativeLayout sedanLayout;
+
+    @Bind(R.id.booked_cab_layout)
+    RelativeLayout bookedCabLayout;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +102,7 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
             gpsLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
                     50, this);
-
+            fetchDetails();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -138,6 +147,7 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
                             Log.i("Success", "");
                             if (o != null)
                                 Log.i(o.toString(), "");
+                            fetchDetails();
                         }
 
                         @Override
@@ -254,26 +264,65 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
         RetrofitInterface retrofitInterface = Constants.retrofit.create(RetrofitInterface.class);
         HashMap<String, String> params = new HashMap<String, String>();
         params.put(Constants.keyCommand, Constants.commandAvailability);
-        retrofitInterface.postBookRequest(params, new Callback<Object>() {
+        params.put(Constants.keyLat, String.valueOf(gpsLocation.getLatitude()));
+        params.put(Constants.keyLong, String.valueOf(gpsLocation.getLongitude()));
+        retrofitInterface.getCabDetails(params, new Callback<CabDetailsModel>() {
             @Override
-            public void success(Object o, Response response) {
-                Log.i("Success","");
-                if (o != null)
-                    Log.i(o.toString(),"");
+            public void success(CabDetailsModel cabDetailsModel, Response response) {
+                Log.i("Successfully fetched data","");
 
+                fillDetails(cabDetailsModel);
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Log.i("Failed","");
-                if (error != null)
-                    Log.i(error.toString(),"");
-                Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    void fillDetails(){
+    void fillDetails(CabDetailsModel cabDetailsModel){
+        topLayout.setVisibility(View.VISIBLE);
+        txtSpeechInput.setVisibility(View.INVISIBLE);
+        confirmButton.setVisibility(View.INVISIBLE);
+        if (cabDetailsModel != null){
+            if (cabDetailsModel.getCabs() != null && cabDetailsModel.getCabs().getSedan() != null){
+                if (cabDetailsModel.getCabs().getSedan().getEta() != null && Integer.parseInt(cabDetailsModel.getCabs().getSedan().getEta()) > 1){
+                    labelSedanEta.setText(cabDetailsModel.getCabs().getSedan().getEta() + " mins away");
+                    labelSedanEta.setVisibility(View.VISIBLE);
+                } else {
+                    labelSedanEta.setVisibility(View.INVISIBLE);
+                }
 
+                if (cabDetailsModel.getCabs().getSedan().getSurcharge() != null){
+                    labelSedanSurcharge.setText(cabDetailsModel.getCabs().getSedan().getSurcharge());
+                    labelSedanSurcharge.setVisibility(View.VISIBLE);
+                } else {
+                    labelSedanSurcharge.setVisibility(View.INVISIBLE);
+                }
+
+            } else {
+                sedanLayout.setVisibility(View.GONE);
+            }
+            if (cabDetailsModel.getRide() != null){
+                if (cabDetailsModel.getRide().getPickup_time()!= null){
+                    labelBookedInfo.setVisibility(View.VISIBLE);
+                    labelBookedInfo.setText("For "+cabDetailsModel.getRide().getPickup_time());
+                } else {
+                    labelBookedInfo.setVisibility(View.INVISIBLE);
+                }
+
+                if (cabDetailsModel.getRide().getCategory()!= null){
+                    labelBookedCab.setVisibility(View.VISIBLE);
+                    labelBookedCab.setText(cabDetailsModel.getRide().getCategory());
+                } else {
+                    labelBookedCab.setVisibility(View.INVISIBLE);
+                }
+            } else {
+                bookedCabLayout.setVisibility(View.GONE);
+            }
+        } else {
+            Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
+        }
     }
 }

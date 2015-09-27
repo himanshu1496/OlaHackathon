@@ -1,6 +1,8 @@
 package himanshu.creative.com.ola_hack.interfaces;
 
 import java.util.HashMap;
+
+import himanshu.creative.com.ola_hack.modals.CabDetailsModel;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.QueryMap;
@@ -11,7 +13,7 @@ public interface RetrofitInterface {
     void postBookRequest(@QueryMap HashMap<String, String> params, Callback<Object> cb);
 
     @GET("/index")
-    void getCabDetails(@QueryMap HashMap<String, String> params, Callback<Object> cb);
+    void getCabDetails(@QueryMap HashMap<String, String> params, Callback<CabDetailsModel> cb);
 
 //    @GET("/getAppointments")
 //    void getAppointments(@Header("token") String token, Callback<List<AppointmentModel>> callback);

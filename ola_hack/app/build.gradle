@@ -25,6 +25,5 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.android.support:design:22.2.1'
-    compile 'com.romainpiel.shimmer:library:1.4.0@aar'
     compile 'com.jakewharton:butterknife:7.0.1'
 }
