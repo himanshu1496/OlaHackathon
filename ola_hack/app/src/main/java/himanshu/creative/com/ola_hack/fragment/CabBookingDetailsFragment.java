@@ -2,6 +2,7 @@ package himanshu.creative.com.ola_hack.fragment;
 
 
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 
 import android.app.Activity;
@@ -67,8 +68,6 @@ public class CabBookingDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         activity = (AppCompatActivity) getActivity();
         Methods.checkAndAskForGPS(activity);
         View rootView = inflater.inflate(R.layout.fragment_view_booking, container, false);
@@ -88,7 +87,6 @@ public class CabBookingDetailsFragment extends Fragment {
             @Override
             public void success(RideModel rideModel, Response response) {
                 Log.i("Successfully fetched data", "");
-
                 fillDetails(rideModel);
             }
 
@@ -123,10 +121,20 @@ public class CabBookingDetailsFragment extends Fragment {
             if (rideModel.getDriver_number()!=null) {
                 phoneNumber.setText(rideModel.getDriver_number());
                 phoneNumber.setVisibility(View.VISIBLE);
+
             } else {
                 phoneNumber.setVisibility(View.INVISIBLE);
             }
 
+            phoneNumber.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + phoneNumber.getText().toString()));
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            });
 
 
         } else {

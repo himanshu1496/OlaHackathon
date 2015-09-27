@@ -349,7 +349,8 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
             @Override
             public void failure(RetrofitError error) {
                 progressBar.setVisibility(View.INVISIBLE);
-                Log.i("Failed","");
+                Log.i("Failed", "");
+                Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
     }

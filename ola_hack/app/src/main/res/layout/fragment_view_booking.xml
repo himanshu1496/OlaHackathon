@@ -98,16 +98,13 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingTop = "16dp"
-
-
-                android:paddingBottom = "16dp"
-                android:background="#E18B3D"
-                android:textColor="#FFFFFF"
-
-
+                android:paddingTop = "8dp"
+                android:paddingBottom = "8dp"
+                android:layout_margin="8dp"
+                android:background="@color/ola_theme_color"
+                android:textColor="@color/white"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Call: Phone Number"
                 android:fontFamily="sans-serif"
