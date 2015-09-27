@@ -56,12 +56,18 @@ public class CabBookingDetailsFragment extends Fragment {
     RelativeLayout mainLayout;
     @Bind(R.id.vehnum)
     TextView vehiclleNum;
+    @Bind(R.id.category)
+    TextView category;
     @Bind(R.id.carmodel)
     TextView carModel;
     @Bind(R.id.phonenum)
     TextView phoneNumber;
     @Bind(R.id.drivname)
     TextView driverName;
+    @Bind(R.id.time)
+    TextView pickUpTime;
+
+
     @Bind(R.id.indeterminate_horizontal_progress)
     ProgressBar progressBar;
 
@@ -126,6 +132,18 @@ public class CabBookingDetailsFragment extends Fragment {
                 driverName.setVisibility(View.VISIBLE);
             } else {
                 driverName.setVisibility(View.INVISIBLE);
+            }
+            if (rideModel.getCategory()!=null) {
+                category.setText(rideModel.getCategory());
+                category.setVisibility(View.VISIBLE);
+            } else {
+                category.setVisibility(View.INVISIBLE);
+            }
+            if (rideModel.getPickup_time()!=null) {
+                pickUpTime.setText(rideModel.getPickup_time());
+                pickUpTime.setVisibility(View.VISIBLE);
+            } else {
+                pickUpTime.setVisibility(View.INVISIBLE);
             }
             if (rideModel.getDriver_number()!=null) {
                 phoneNumber.setVisibility(View.VISIBLE);
