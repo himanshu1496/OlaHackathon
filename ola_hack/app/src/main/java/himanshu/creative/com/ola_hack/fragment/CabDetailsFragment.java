@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -35,6 +36,7 @@ import butterknife.ButterKnife;
 import himanshu.creative.com.ola_hack.R;
 import himanshu.creative.com.ola_hack.interfaces.RetrofitInterface;
 import himanshu.creative.com.ola_hack.modals.CabDetailsModel;
+import himanshu.creative.com.ola_hack.modals.OnSuccess;
 import himanshu.creative.com.ola_hack.utils.Constants;
 import himanshu.creative.com.ola_hack.utils.Methods;
 import himanshu.creative.com.ola_hack.utils.PreferenceUtils;
@@ -43,7 +45,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class CabDetailsFragment extends Fragment implements EditText.OnEditorActionListener, LocationListener {
+public class CabDetailsFragment extends Fragment implements LocationListener {
 
     Activity activity;
     Location gpsLocation;
@@ -74,6 +76,9 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
     TextView labelBookedInfo;
     @Bind(R.id.label_view_booking)
     TextView labelViewBooking;
+    @Bind(R.id.label_confirmed)
+    TextView labelConfirmed;
+
 
     @Bind(R.id.sedan_layout)
     RelativeLayout sedanLayout;
@@ -94,7 +99,7 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
 
         activity = (AppCompatActivity) getActivity();
         Methods.checkAndAskForGPS(activity);
-        View rootView = inflater.inflate(R.layout.fragment_cab_details, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_cab_details, container, false);
         ButterKnife.bind(this, rootView);
 
         try {
@@ -120,6 +125,52 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
             }
         });
 
+        labelSedanBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (gpsLocation == null) {
+                    buttonPressedFlag = true;
+                    Toast.makeText(activity, "Please Wait..while we fetch your location.", Toast.LENGTH_LONG).show();
+                } else if (gpsLocation.getLatitude() == 0 && gpsLocation.getLongitude() == 0) {
+                    Methods.checkAndAskForGPS(activity);
+                } else {
+
+                    RetrofitInterface retrofitInterface = Constants.retrofit.create(RetrofitInterface.class);
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put(Constants.keyAccessTaken, PreferenceUtils.getAuthToken());
+                    params.put(Constants.keyLat, String.valueOf(gpsLocation.getLatitude()));
+                    params.put(Constants.keyLong, String.valueOf(gpsLocation.getLongitude()));
+                    retrofitInterface.postBookNowRequest(params, new Callback<OnSuccess>() {
+                        @Override
+                        public void success(OnSuccess onSuccess, Response response) {
+                            Log.i("Success", "");
+                            if (onSuccess != null){
+                                Snackbar
+                                        .make(rootView, onSuccess.message, Snackbar.LENGTH_INDEFINITE)
+                                        .setAction(R.string.okay, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                fetchDetails();
+                                            }
+                                        })
+                                        .show();
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Log.i("Failed", "");
+                            if (error != null)
+                                Log.i(error.toString(), "");
+                            Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
+            }
+
+        });
+
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             protected Object clone() throws CloneNotSupportedException {
@@ -141,13 +192,22 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
                     params.put(Constants.keyLat, String.valueOf(gpsLocation.getLatitude()));
                     params.put(Constants.keyLong, String.valueOf(gpsLocation.getLongitude()));
                     params.put(Constants.keyCommand, txtSpeechInput.getText().toString());
-                    retrofitInterface.postBookRequest(params, new Callback<Object>() {
+                    retrofitInterface.postBookRequest(params, new Callback<OnSuccess>() {
                         @Override
-                        public void success(Object o, Response response) {
+                        public void success(OnSuccess onSuccess, Response response) {
                             Log.i("Success", "");
-                            if (o != null)
-                                Log.i(o.toString(), "");
-                            fetchDetails();
+                            if (onSuccess != null){
+                                Snackbar
+                                        .make(rootView, onSuccess.message, Snackbar.LENGTH_INDEFINITE)
+                                        .setAction(R.string.okay, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                fetchDetails();
+                                            }
+                                        })
+                                        .show();
+
+                            }
                         }
 
                         @Override
@@ -162,6 +222,7 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
 
             }
         });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +232,13 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
             }
         });
 
+        txtSpeechInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Editing","");
+                confirmButton.setVisibility(View.VISIBLE);
+            }
+        });
         return rootView;
     }
 
@@ -215,15 +283,6 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
         }
     }
 
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (v.getText().toString().length() > 0){
-            confirmButton.setVisibility(View.VISIBLE);
-        } else {
-            confirmButton.setVisibility(View.INVISIBLE);
-        }
-        return true;
-    }
 
     @Override
     public void onLocationChanged(Location location) {
@@ -272,6 +331,7 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
         topLayout.setVisibility(View.VISIBLE);
         txtSpeechInput.setVisibility(View.INVISIBLE);
         confirmButton.setVisibility(View.INVISIBLE);
+        txtSpeechInput.setText("Type");
         if (cabDetailsModel != null){
             if (cabDetailsModel.getCabs() != null && cabDetailsModel.getCabs().getSedan() != null){
                 if (cabDetailsModel.getCabs().getSedan().getEta() != null && Integer.parseInt(cabDetailsModel.getCabs().getSedan().getEta()) > 1){
@@ -301,10 +361,17 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
 
                 if (cabDetailsModel.getRide().getCategory()!= null){
                     labelBookedCab.setVisibility(View.VISIBLE);
-                    labelBookedCab.setText(cabDetailsModel.getRide().getCategory());
+                    labelBookedCab.setText(cabDetailsModel.getRide().getCategory().toUpperCase());
                 } else {
                     labelBookedCab.setVisibility(View.INVISIBLE);
                 }
+
+                if (cabDetailsModel.getRide().isConfirmed()){
+                    labelConfirmed.setVisibility(View.VISIBLE);
+                } else {
+                    labelConfirmed.setVisibility(View.INVISIBLE);
+                }
+
             } else {
                 bookedCabLayout.setVisibility(View.GONE);
             }

@@ -89,9 +89,8 @@
             android:layout_weight="1"
             android:background="@drawable/divider">
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="36dp"
-
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="CAB"
                 android:paddingTop="16dp"
@@ -100,8 +99,9 @@
                 android:id="@+id/label_booked_cab"
                 />
 
+
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:paddingLeft="8dp"
 
@@ -120,6 +120,19 @@
                 android:text="VIEW BOOKING"
                 android:id="@+id/label_view_booking"
                 />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Confirmed"
+                android:textSize="@dimen/font_size_micro"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/button_solid_color"
+                android:layout_below="@id/label_view_booking"
+                android:layout_alignParentRight="true"
+                android:id="@+id/label_confirmed"
+                />
 
         </RelativeLayout>
 
@@ -132,9 +145,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
+        android:layout_marginLeft="@dimen/confirm_button_padding"
+        android:layout_marginRight="@dimen/confirm_button_padding"
         android:background="@null"
         android:textSize="@dimen/font_size_xlarge"
         android:textStyle="normal"
+        android:imeOptions="actionGo"
         android:visibility="invisible"/>
 
     <LinearLayout
