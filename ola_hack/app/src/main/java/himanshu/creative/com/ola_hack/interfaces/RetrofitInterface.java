@@ -7,8 +7,11 @@ import retrofit.http.QueryMap;
 
 public interface RetrofitInterface {
 
-    @GET("/")
+    @GET("/command")
     void postBookRequest(@QueryMap HashMap<String, String> params, Callback<Object> cb);
+
+    @GET("/index")
+    void getCabDetails(@QueryMap HashMap<String, String> params, Callback<Object> cb);
 
 //    @GET("/getAppointments")
 //    void getAppointments(@Header("token") String token, Callback<List<AppointmentModel>> callback);

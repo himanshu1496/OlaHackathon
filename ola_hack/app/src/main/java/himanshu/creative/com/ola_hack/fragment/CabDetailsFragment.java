@@ -44,6 +44,7 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
 
     Activity activity;
     Location gpsLocation;
+    boolean buttonPressedFlag = false;
 
     @Bind(R.id.txtSpeechInput)
     EditText txtSpeechInput;
@@ -53,6 +54,21 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
     LinearLayout topLayout;
     @Bind(R.id.confirm_button)
     TextView confirmButton;
+    @Bind(R.id.label_sedan)
+    TextView labelSedan;
+    @Bind(R.id.label_sedan_eta)
+    TextView labelSedanEta;
+    @Bind(R.id.label_sedan_book)
+    TextView labelSedanBook;
+    @Bind(R.id.label_sedan_surcharge)
+    TextView labelSedanSurcharge;
+
+    @Bind(R.id.label_booked_cab)
+    TextView labelBookedCab;
+    @Bind(R.id.label_booked_cab_info)
+    TextView labelBookedInfo;
+    @Bind(R.id.label_view_booking)
+    TextView labelViewBooking;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,9 +87,7 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
 
         try {
             LocationManager mLocationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-            Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (gpsLocation.getLatitude() == 0)
-                gpsLocation = location;
+            gpsLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
                     50, this);
 
@@ -102,10 +116,13 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
 
             @Override
             public void onClick(View v) {
-                if (gpsLocation.getLatitude() == 0 && gpsLocation.getLongitude() == 0){
+                if (gpsLocation == null) {
+                    buttonPressedFlag = true;
+                    Toast.makeText(activity, "Please Wait..while we fetch your location.", Toast.LENGTH_LONG).show();
+                } else if (gpsLocation.getLatitude() == 0 && gpsLocation.getLongitude() == 0) {
                     Methods.checkAndAskForGPS(activity);
                 } else {
-                    //TODO Make network request here
+
                     RetrofitInterface retrofitInterface = Constants.retrofit.create(RetrofitInterface.class);
                     HashMap<String, String> params = new HashMap<String, String>();
                     params.put(Constants.keyAccessTaken, PreferenceUtils.getAuthToken());
@@ -115,14 +132,16 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
                     retrofitInterface.postBookRequest(params, new Callback<Object>() {
                         @Override
                         public void success(Object o, Response response) {
-                            Log.i("Success","");
+                            Log.i("Success", "");
                             if (o != null)
-                                Log.i(o.toString(),"");
+                                Log.i(o.toString(), "");
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
-                            Log.i("Failed","");
+                            Log.i("Failed", "");
+                            if (error != null)
+                                Log.i(error.toString(), "");
                             Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
                         }
                     });
@@ -187,6 +206,8 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
 
     @Override
     public void onLocationChanged(Location location) {
+        if (buttonPressedFlag)
+            Toast.makeText(activity, "We have got the location...you can press confirm.", Toast.LENGTH_LONG).show();
         gpsLocation = location;
     }
 
@@ -203,5 +224,32 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    void fetchDetails(){
+        RetrofitInterface retrofitInterface = Constants.retrofit.create(RetrofitInterface.class);
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put(Constants.keyCommand, Constants.commandAvailability);
+        retrofitInterface.postBookRequest(params, new Callback<Object>() {
+            @Override
+            public void success(Object o, Response response) {
+                Log.i("Success","");
+                if (o != null)
+                    Log.i(o.toString(),"");
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.i("Failed","");
+                if (error != null)
+                    Log.i(error.toString(),"");
+                Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    void fillDetails(){
+        
     }
 }
