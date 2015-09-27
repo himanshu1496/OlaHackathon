@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ import himanshu.creative.com.ola_hack.modals.OnSuccess;
 import himanshu.creative.com.ola_hack.utils.Constants;
 import himanshu.creative.com.ola_hack.utils.Methods;
 import himanshu.creative.com.ola_hack.utils.PreferenceUtils;
+import me.zhanghai.android.materialprogressbar.IndeterminateHorizontalProgressDrawable;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -86,6 +88,8 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
     @Bind(R.id.booked_cab_layout)
     RelativeLayout bookedCabLayout;
 
+    @Bind(R.id.indeterminate_horizontal_progress)
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,6 +106,8 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
         final View rootView = inflater.inflate(R.layout.fragment_cab_details, container, false);
         ButterKnife.bind(this, rootView);
 
+        progressBar.setIndeterminateDrawable(new IndeterminateHorizontalProgressDrawable(activity));
+        progressBar.setVisibility(View.VISIBLE);
         try {
             LocationManager mLocationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
             gpsLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -128,13 +134,14 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
         labelSedanBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (gpsLocation == null) {
                     buttonPressedFlag = true;
                     Toast.makeText(activity, "Please Wait..while we fetch your location.", Toast.LENGTH_LONG).show();
                 } else if (gpsLocation.getLatitude() == 0 && gpsLocation.getLongitude() == 0) {
                     Methods.checkAndAskForGPS(activity);
                 } else {
-
+                    labelSedanBook.setEnabled(false);
                     RetrofitInterface retrofitInterface = Constants.retrofit.create(RetrofitInterface.class);
                     HashMap<String, String> params = new HashMap<String, String>();
                     params.put(Constants.keyAccessTaken, PreferenceUtils.getAuthToken());
@@ -144,7 +151,8 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
                         @Override
                         public void success(OnSuccess onSuccess, Response response) {
                             Log.i("Success", "");
-                            if (onSuccess != null){
+                            labelSedanBook.setEnabled(true);
+                            if (onSuccess != null) {
                                 Snackbar
                                         .make(rootView, onSuccess.message, Snackbar.LENGTH_INDEFINITE)
                                         .setAction(R.string.okay, new View.OnClickListener() {
@@ -160,6 +168,7 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
                         @Override
                         public void failure(RetrofitError error) {
                             Log.i("Failed", "");
+                            labelSedanBook.setEnabled(true);
                             if (error != null)
                                 Log.i(error.toString(), "");
                             Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
@@ -185,7 +194,8 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
                 } else if (gpsLocation.getLatitude() == 0 && gpsLocation.getLongitude() == 0) {
                     Methods.checkAndAskForGPS(activity);
                 } else {
-
+                    confirmButton.setEnabled(false);
+                    progressBar.setVisibility(View.VISIBLE);
                     RetrofitInterface retrofitInterface = Constants.retrofit.create(RetrofitInterface.class);
                     HashMap<String, String> params = new HashMap<String, String>();
                     params.put(Constants.keyAccessTaken, PreferenceUtils.getAuthToken());
@@ -196,6 +206,8 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
                         @Override
                         public void success(OnSuccess onSuccess, Response response) {
                             Log.i("Success", "");
+                            progressBar.setVisibility(View.INVISIBLE);
+                            confirmButton.setEnabled(true);
                             if (onSuccess != null){
                                 Snackbar
                                         .make(rootView, onSuccess.message, Snackbar.LENGTH_INDEFINITE)
@@ -213,6 +225,8 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
                         @Override
                         public void failure(RetrofitError error) {
                             Log.i("Failed", "");
+                            progressBar.setVisibility(View.INVISIBLE);
+                            confirmButton.setEnabled(true);
                             if (error != null)
                                 Log.i(error.toString(), "");
                             Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
@@ -309,6 +323,7 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
     void fetchDetails(){
         RetrofitInterface retrofitInterface = Constants.retrofit.create(RetrofitInterface.class);
         HashMap<String, String> params = new HashMap<String, String>();
+        progressBar.setVisibility(View.VISIBLE);
         params.put(Constants.keyCommand, Constants.commandAvailability);
         params.put(Constants.keyLat, String.valueOf(gpsLocation.getLatitude()));
         params.put(Constants.keyLong, String.valueOf(gpsLocation.getLongitude()));
@@ -316,12 +331,13 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
             @Override
             public void success(CabDetailsModel cabDetailsModel, Response response) {
                 Log.i("Successfully fetched data","");
-
+                progressBar.setVisibility(View.INVISIBLE);
                 fillDetails(cabDetailsModel);
             }
 
             @Override
             public void failure(RetrofitError error) {
+                progressBar.setVisibility(View.INVISIBLE);
                 Log.i("Failed","");
             }
         });

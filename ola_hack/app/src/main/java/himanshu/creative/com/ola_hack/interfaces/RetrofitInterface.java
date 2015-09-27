@@ -13,7 +13,7 @@ public interface RetrofitInterface {
     @GET("/command")
     void postBookRequest(@QueryMap HashMap<String, String> params, Callback<OnSuccess> cb);
 
-    @GET("/command")
+    @GET("/book")
     void postBookNowRequest(@QueryMap HashMap<String, String> params, Callback<OnSuccess> cb);
 
     @GET("/index")
