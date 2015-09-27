@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="ola_theme_color">#deff29</color>
-    <color name="white">#ffffff</color>
-    <color name="loading_color">#000000</color>
-    <color name="black">#000000</color>
-    <color name="bg_gradient_start">#deff29</color>
-    <color name="bg_gradient_end">#29dbc4</color>
-</resources>
