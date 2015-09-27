@@ -2,7 +2,7 @@
 <resources>
 
     <color name="white">#ffffff</color>
-    <color name="loading_color">#000000</color>
+    <color name="loading_color">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="bg_gradient_start">#deff29</color>
     <color name="bg_gradient_end">#29dbc4</color>

@@ -13,15 +13,27 @@
     android:id="@+id/logo"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:src="@drawable/logo_alpha"
+    android:layout_marginTop="70dp"
+    android:layout_centerHorizontal="true"
+    android:src="@drawable/oval_37_imported_layers"
     />
-
+    
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/app_name"
+    android:textSize="@dimen/font_size_xxlarge"
+    android:padding="4dp"
+    android:textStyle="bold"
+    android:layout_below="@id/logo"
+    android:layout_centerHorizontal="true"
+    android:textColor="@color/white"
+    android:text="@string/app_name"/>
     <com.pnikosis.materialishprogress.ProgressWheel
         android:id="@+id/progress_wheel"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_below="@id/logo"
+        android:layout_below="@id/app_name"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         wheel:matProg_barColor="@color/loading_color"

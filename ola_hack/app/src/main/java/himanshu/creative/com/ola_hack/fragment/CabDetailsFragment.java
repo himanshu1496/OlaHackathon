@@ -88,6 +88,7 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
 
     @Bind(R.id.indeterminate_horizontal_progress)
     ProgressBar progressBar;
+    View rootView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,7 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
 
         activity = (AppCompatActivity) getActivity();
         Methods.checkAndAskForGPS(activity);
-        final View rootView = inflater.inflate(R.layout.fragment_cab_details, container, false);
+        rootView = inflater.inflate(R.layout.fragment_cab_details, container, false);
         ButterKnife.bind(this, rootView);
 
         progressBar.setIndeterminateDrawable(new IndeterminateHorizontalProgressDrawable(activity));
@@ -350,7 +351,15 @@ public class CabDetailsFragment extends Fragment implements LocationListener {
             public void failure(RetrofitError error) {
                 progressBar.setVisibility(View.INVISIBLE);
                 Log.i("Failed", "");
-                Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
+                Snackbar
+                        .make(rootView, "Oops! Something went wrong", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("RETRY", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                fetchDetails();
+                            }
+                        })
+                        .show();
             }
         });
     }

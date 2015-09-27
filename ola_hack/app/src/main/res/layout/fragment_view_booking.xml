@@ -1,116 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/top_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ProgressBar
+        android:id="@+id/indeterminate_horizontal_progress"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:indeterminate="true"
+        android:visibility="invisible" />
+    <RelativeLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/confirm_button_padding">
+    <TextView
+        android:id="@+id/label_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REQUEST"
+        android:paddingTop="@dimen/confirm_button_padding"
+        android:paddingLeft="@dimen/confirm_button_padding"
+        android:textSize="@dimen/font_size_micro"
+        android:textColor="@color/black54"/>
+    <View
+        android:id="@+id/horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/label_request"
+        android:background="@color/black54"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop= "@dimen/confirm_button_padding"
+        android:paddingLeft = "@dimen/confirm_button_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_xlarge"
+        android:text="MINI"
+        android:fontFamily="sans-serif"
+        android:id="@+id/category"
+        android:layout_below="@id/horizontal_line"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft= "@dimen/confirm_button_padding"
+        android:paddingBottom= "@dimen/confirm_button_padding"
+        android:textColor="@color/black54"
+        android:textSize="@dimen/font_size_medium"
+        android:text="FOR 5:00PM"
+        android:fontFamily="sans-serif"
+        android:id="@+id/time"
+        android:layout_below="@id/category"
+        />
+
+    <TextView
+        android:id="@+id/label_cab_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CAB DETAILS"
+        android:paddingTop="@dimen/confirm_button_padding"
+        android:paddingLeft="@dimen/confirm_button_padding"
+        android:textSize="@dimen/font_size_micro"
+        android:textColor="@color/black54"
+        android:layout_below="@id/time"/>
+    <View
+        android:id="@+id/horizontal_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/label_cab_details"
+        android:background="@color/black54"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop = "@dimen/confirm_button_padding"
+        android:paddingLeft="@dimen/confirm_button_padding"
+        android:layout_below="@id/horizontal_line2"
+        android:textSize="@dimen/font_size_xlarge"
+        android:text="DRIVER NAME"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif"
+        android:id="@+id/drivname"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft= "@dimen/confirm_button_padding"
+        android:paddingBottom= "@dimen/confirm_button_padding"
+        android:textColor="@color/black54"
+        android:textSize="@dimen/font_size_medium"
+        android:text="DRIVER"
+        android:fontFamily="sans-serif"
+        android:id="@+id/label_driver_name"
+        android:layout_below="@id/drivname"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingTop = "@dimen/confirm_button_padding"
+        android:paddingLeft="@dimen/confirm_button_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_xlarge"
+        android:text="MAHINDRA VENITO"
+        android:fontFamily="sans-serif"
+        android:id="@+id/carmodel"
+        android:layout_below="@id/label_driver_name"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft ="@dimen/confirm_button_padding"
+        android:textSize="@dimen/font_size_medium"
+        android:text="VEHICLE NUMBER"
+        android:fontFamily="sans-serif"
+        android:id="@+id/vehnum"
+        android:layout_below="@id/carmodel"
+        />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="SUDO"
-            android:background="#E18B3D"
-            android:textColor="#FFFFFF"
-            android:fontFamily="sans-serif-medium"
-            android:id="@+id/textView1"
-            android:gravity="center"/>
-    </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:gravity="left"
-
-                android:paddingTop="24dp"
-                android:paddingBottom = "6dp"
-                android:paddingLeft="16dp"
-
-
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:text="Car Model"
-                android:fontFamily="sans-serif"
-                android:id="@+id/carmodel"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="88dp"
-            android:gravity="left"
-
-            android:paddingTop="24dp"
-            android:paddingBottom = "24dp"
-            android:paddingLeft="16dp"
-
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Vehicle Number"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop = "8dp"
+            android:paddingBottom = "8dp"
+            android:background="@color/ola_theme_color"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_xlarge"
+            android:text="CALL DRIVER"
             android:fontFamily="sans-serif"
-            android:id="@+id/vehnum"
-            android:autoText="false" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:gravity="center"
-                android:paddingTop = "160dp"
-                android:paddingBottom = "8dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Driver Name"
-                android:fontFamily="sans-serif"
-                android:id="@+id/drivname"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop = "8dp"
-                android:paddingBottom = "8dp"
-                android:layout_margin="8dp"
-                android:background="@color/ola_theme_color"
-                android:textColor="@color/white"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Call: Phone Number"
-                android:fontFamily="sans-serif"
-                android:id="@+id/phonenum"
-                />
-        </RelativeLayout>
-    </LinearLayout>
-
+            android:id="@+id/phonenum"
+            />
+    </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

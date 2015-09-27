@@ -2,6 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="font_size_xxlarge">28sp</dimen>
     <dimen name="font_size_xlarge">24sp</dimen>
     <dimen name="font_size_large">18sp</dimen>
     <dimen name="font_size_medium">16sp</dimen>
@@ -9,4 +10,5 @@
     <dimen name="font_size_micro">12sp</dimen>
     <dimen name="confirm_button_padding">10dp</dimen>
     <dimen name="confirm_button_margin">8dp</dimen>
+    <dimen name="booked_page_label_padding">15dp</dimen>
 </resources>

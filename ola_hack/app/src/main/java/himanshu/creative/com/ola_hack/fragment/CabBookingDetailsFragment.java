@@ -26,7 +26,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -50,8 +52,8 @@ import retrofit.client.Response;
 
 public class CabBookingDetailsFragment extends Fragment {
     Activity activity;
-    @Bind(R.id.top_layout)
-    LinearLayout topLayout;
+    @Bind(R.id.main_layout)
+    RelativeLayout mainLayout;
     @Bind(R.id.vehnum)
     TextView vehiclleNum;
     @Bind(R.id.carmodel)
@@ -60,6 +62,9 @@ public class CabBookingDetailsFragment extends Fragment {
     TextView phoneNumber;
     @Bind(R.id.drivname)
     TextView driverName;
+    @Bind(R.id.indeterminate_horizontal_progress)
+    ProgressBar progressBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +83,7 @@ public class CabBookingDetailsFragment extends Fragment {
 
     }
     void fetchDetails() {
+        progressBar.setVisibility(View.VISIBLE);
         RetrofitInterface retrofitInterface = Constants.retrofit.create(RetrofitInterface.class);
         HashMap<String, String> params = new HashMap<String, String>();
         /* params.put(Constants.keyCommand, Constants.commandAvailability);
@@ -88,20 +94,23 @@ public class CabBookingDetailsFragment extends Fragment {
             public void success(RideModel rideModel, Response response) {
                 Log.i("Successfully fetched data", "");
                 fillDetails(rideModel);
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void failure(RetrofitError error) {
+                progressBar.setVisibility(View.INVISIBLE);
                 Log.i("Failed", "");
+                Toast.makeText(activity, "Oops! Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
     }
-    void fillDetails(RideModel rideModel) {
-        topLayout.setVisibility(View.VISIBLE);
+    void fillDetails(final RideModel rideModel) {
+        mainLayout.setVisibility(View.VISIBLE);
         if (rideModel != null) {
 
                 if (rideModel.getCab_number()!=null) {
-                    vehiclleNum.setText(rideModel.getCab_number());
+                    vehiclleNum.setText(rideModel.getCab_number().toUpperCase());
                     vehiclleNum.setVisibility(View.VISIBLE);
                 } else {
                     vehiclleNum.setVisibility(View.INVISIBLE);
@@ -119,22 +128,21 @@ public class CabBookingDetailsFragment extends Fragment {
                 driverName.setVisibility(View.INVISIBLE);
             }
             if (rideModel.getDriver_number()!=null) {
-                phoneNumber.setText(rideModel.getDriver_number());
                 phoneNumber.setVisibility(View.VISIBLE);
-
+                phoneNumber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:" + rideModel.getDriver_number()));
+                        activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
+                });
             } else {
                 phoneNumber.setVisibility(View.INVISIBLE);
             }
 
-            phoneNumber.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:" + phoneNumber.getText().toString()));
-                    activity.startActivity(intent);
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }
-            });
+
 
 
         } else {
