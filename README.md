@@ -15,3 +15,5 @@ Mobile application screens:
 ![Confirm Rule](http://himanshu1496.github.io/OlaHackathon/ola_hack/img/Voice input.png)
 ![Dashboard2](http://himanshu1496.github.io/OlaHackathon/ola_hack/img/Dashboard Copy.png)
 ![View Booking](http://himanshu1496.github.io/OlaHackathon/ola_hack/img/Confirmed.png)
+
+Logo Credit: Penguin by Yi Chen from the Noun Project
