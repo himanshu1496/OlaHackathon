@@ -14,7 +14,8 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/confirm_button_padding">
+        android:padding="@dimen/confirm_button_padding"
+        android:visibility="invisible">
     <TextView
         android:id="@+id/label_request"
         android:layout_width="wrap_content"
