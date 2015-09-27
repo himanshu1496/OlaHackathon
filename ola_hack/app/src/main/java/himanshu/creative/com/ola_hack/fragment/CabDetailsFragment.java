@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -50,6 +51,8 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
     EditText txtSpeechInput;
     @Bind(R.id.btnSpeak)
     ImageButton btnSpeak;
+    @Bind(R.id.back_button)
+    ImageView backButton;
     @Bind(R.id.top_layout)
     LinearLayout topLayout;
     @Bind(R.id.confirm_button)
@@ -147,6 +150,14 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
                     });
                 }
 
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                topLayout.setVisibility(View.VISIBLE);
+                confirmButton.setVisibility(View.INVISIBLE);
+                txtSpeechInput.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -250,6 +261,6 @@ public class CabDetailsFragment extends Fragment implements EditText.OnEditorAct
     }
 
     void fillDetails(){
-        
+
     }
 }
