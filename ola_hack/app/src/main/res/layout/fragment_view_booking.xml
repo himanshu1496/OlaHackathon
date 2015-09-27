@@ -43,7 +43,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Vehicle Number"
             android:fontFamily="sans-serif"
-            android:id="@+id/textView2"
+            android:id="@+id/vehnum"
             />
         </RelativeLayout>
         <RelativeLayout
@@ -54,17 +54,35 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="88dp"
                 android:gravity="center"
 
+                android:paddingTop="2dp"
+                android:paddingBottom = "48dp"
 
+
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Car Model"
+                android:fontFamily="sans-serif"
+                android:id="@+id/carmodel"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:paddingTop = "160dp"
                 android:paddingBottom = "8dp"
-
-
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Driver Name"
                 android:fontFamily="sans-serif"
-                android:id="@+id/textView3"
+                android:id="@+id/drivname"
                 />
         </RelativeLayout>
         <RelativeLayout
@@ -77,16 +95,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:gravity="center"
-                android:paddingTop = "32dp"
+                android:paddingTop = "16dp"
 
 
-                android:paddingBottom = "8dp"
+                android:paddingBottom = "16dp"
+                android:background="#E18B3D"
+                android:textColor="#FFFFFF"
 
 
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Call: Phone Number"
                 android:fontFamily="sans-serif"
-                android:id="@+id/textView3"
+                android:id="@+id/phonenum"
                 />
         </RelativeLayout>
     </LinearLayout>
